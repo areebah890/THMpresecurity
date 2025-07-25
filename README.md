@@ -33,10 +33,16 @@ The **Pre-Security Path** is designed for absolute beginners and covers essentia
 ## 🏁 Completion
 
 - 📅 **Completed:** July 25, 2025  
-- 🏆 **Certificate:**<img width="475" height="335" alt="image" src="https://github.com/user-attachments/assets/65193c8c-5d60-44cb-9595-e83b38e63c79" />
+- 🏆 **Certificate:**
 
 
-Badge Screenshot <img width="741" height="425" alt="image" src="https://github.com/user-attachments/assets/ef71158b-1fd5-426c-b54b-c00250b2f6cc" />
+<img width="475" height="335" alt="image" src="https://github.com/user-attachments/assets/65193c8c-5d60-44cb-9595-e83b38e63c79" />
+
+
+Badge Screenshot
+
+
+<img width="741" height="425" alt="image" src="https://github.com/user-attachments/assets/ef71158b-1fd5-426c-b54b-c00250b2f6cc" />
 
 
 ## 🧠 Key Skills Gained
