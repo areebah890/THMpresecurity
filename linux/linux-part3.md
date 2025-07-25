@@ -1,146 +1,225 @@
-# 🚀 Linux Fundamentals Part 3 Cheat Sheet
+# 🚀 Linux Fundamentals Part 3 — Cheat Sheet & Learning Reflection
+
+This is a personal cheat sheet and reflection based on the **Linux Fundamentals Part 3** room on [TryHackMe](https://tryhackme.com/). It covers essential Linux skills including file editing, process management, automation, and more.
+
+---
+
+## 📚 Table of Contents
+
+- [Editing Text Files in Terminal](#editing-text-files-in-terminal)
+- [Downloading Files](#downloading-files)
+- [Secure File Transfer](#secure-file-transfer)
+- [Serving Files Over HTTP](#serving-files-over-http)
+- [Processes](#processes)
+- [Managing Services](#managing-services)
+- [Background & Foreground Processes](#background--foreground-processes)
+- [Automation with Cron](#automation-with-cron)
+- [Packages & Repositories](#packages--repositories)
+- [System Logs](#system-logs)
+- [Reflection: What I Learned](#reflection-what-i-learned)
 
 ---
 
 ## 📝 Editing Text Files in Terminal
 
-### 🐢 Nano
-- Simple text editor: `nano filename`
-- Features:
-  - 🔍 Search text: `Ctrl + W`
-  - 📋 Copy/paste
-  - 🏃 Jump to line: `Ctrl + _`
-  - 🔢 Show current line number
-  - ❌ Exit: `Ctrl + X`
+### Nano (Simple Editor)
+```bash
+nano filename
+```
+- 🔍 Search text: `Ctrl + W`  
+- 🏃 Jump to line: `Ctrl + _`  
+- ❌ Exit: `Ctrl + X`
 
-### 🐉 VIM
-- Advanced, customizable terminal editor
-- Features:
-  - ⚙️ Custom keybindings
-  - 🎨 Syntax highlighting (great for coding)
-  - 🌐 Available on almost all terminals
-  - 📚 Extensive tutorials and cheat sheets available
+### VIM (Advanced Editor)
+```bash
+vim filename
+```
+- ⚙️ Highly customizable with plugins and keybindings  
+- 🎨 Syntax highlighting  
+- 🌐 Pre-installed on most systems  
+- 📚 Plenty of online tutorials and cheat sheets
 
 ---
 
 ## 🌐 Downloading Files
 
-### ⬇️ Wget
-- Download files from the web:  
-  `wget https://example.com/file.txt`
+### Wget
+```bash
+wget https://example.com/file.txt
+```
+- Download files directly from the internet
 
 ---
 
 ## 🔐 Secure File Transfer
 
-### 🔄 SCP (Secure Copy)
-- Copy files between local and remote machines over SSH:
-  - 🖥️ Local to remote: `scp file user@remote:/path/`
-  - 🌍 Remote to local: `scp user@remote:/path/file .`
+### SCP (Secure Copy)
+- Local to Remote:
+```bash
+scp file user@remote:/path/
+```
+
+- Remote to Local:
+```bash
+scp user@remote:/path/file .
+```
+
+- Uses SSH for secure transfer
 
 ---
 
 ## 📂 Serving Files Over HTTP
 
-- Use Python3's HTTP server:  
-  `python3 -m http.server`
-- Serves files from current directory, accessible via `curl` or `wget`
-- For advanced lightweight server, consider **Updog** 🐕
+### Python HTTP Server
+```bash
+python3 -m http.server
+```
+- Serves files from the current directory via HTTP  
+- Accessible via `curl`, `wget`, or browser
+
+For a more advanced tool, consider [Updog](https://github.com/sc0tfree/updog) 🐕
 
 ---
 
 ## ⚙️ Processes
 
-### Basics
-- 🧩 Process = running program
-- Each has a unique Process ID (PID)
-- View processes:  
-  `ps aux` or `ps`  
-- Real-time monitoring:  
-  `top`
+### Viewing Processes
+```bash
+ps aux
+top
+```
 
 ### Managing Processes
-- ❌ Kill a process:  
-  `kill <PID>`
-- Signals allow graceful termination ✋
+```bash
+kill <PID>
+```
+- Send signals to terminate or control processes
 
-### Process Start & Init System
-- 🧱 Linux uses namespaces to isolate resources
+### Process Init System
+- Linux uses namespaces and process IDs (PIDs)
 - PID 0: Kernel process  
 - PID 1: `systemd` (Ubuntu’s init system)
-- Child processes managed by `systemd`
 
 ---
 
 ## 🔧 Managing Services
 
-- Use `systemctl` to control services:
-  - ▶️ Start: `systemctl start service`
-  - ⏹️ Stop: `systemctl stop service`
-  - 🔄 Enable on boot: `systemctl enable service`
-  - 🚫 Disable on boot: `systemctl disable service`
+### Using `systemctl`
+```bash
+systemctl start service
+systemctl stop service
+systemctl enable service
+systemctl disable service
+```
+- Controls background services and daemons
 
 ---
 
 ## 🎭 Background & Foreground Processes
 
-- Run command in background: append `&`  
-  e.g. `long_script.sh &`
-- ⏸️ Suspend running process: `Ctrl + Z`
-- ▶️ Resume in foreground: `fg`
-- 🔎 Check running background jobs: `jobs`
+- Run command in background:
+```bash
+long_script.sh &
+```
+
+- Suspend a process:
+```bash
+Ctrl + Z
+```
+
+- Resume foreground job:
+```bash
+fg
+```
+
+- View background jobs:
+```bash
+jobs
+```
 
 ---
 
 ## ⏰ Automation with Cron
 
-- Schedule tasks with `cron`
-- Edit crontab: `crontab -e`
-- Crontab format:  
-  `MIN HOUR DOM MON DOW CMD`
-- Example: backup every 12 hours  
-  `0 */12 * * * cp -R /home/user/Documents /var/backups/`
+### Crontab
+```bash
+crontab -e
+```
+
+### Format
+```
+MIN HOUR DOM MON DOW CMD
+```
+
+### Example: Backup every 12 hours
+```bash
+0 */12 * * * cp -R /home/user/Documents /var/backups/
+```
 
 ---
 
 ## 📦 Packages & Repositories
 
-- Ubuntu uses `apt` for package management
-- ➕ Add repository:  
-  `add-apt-repository ppa:name/ppa`
-- 🔄 Update package list:  
-  `apt update`
-- 📥 Install package:  
-  `apt install package-name`
-- 🗑️ Remove package:  
-  `apt remove package-name`
-- 🔐 Add GPG keys for repository authentication
+### Apt (Ubuntu/Debian)
+
+- Add repository:
+```bash
+add-apt-repository ppa:name/ppa
+```
+
+- Update package list:
+```bash
+apt update
+```
+
+- Install package:
+```bash
+apt install package-name
+```
+
+- Remove package:
+```bash
+apt remove package-name
+```
+
+- Add GPG key (for repo authentication)
 
 ---
 
 ## 📜 System Logs
 
-- Stored in `/var/log`
-- Examples:
-  - 🌐 Apache: access and error logs
-  - 🔒 fail2ban (brute force monitoring)
-  - 🛡️ UFW firewall logs
-- Logs help monitor system health and security
-- 🔄 Log rotation manages log file sizes automatically
+- Location:  
+  ```bash
+  /var/log
+  ```
+
+### Common Logs:
+- Apache: `access.log`, `error.log`  
+- fail2ban: intrusion detection  
+- UFW: firewall events
+
+- **Log rotation** helps manage file size and history
 
 ---
 
-## 🧠 Reflection: What I Learned & Skills Gained from Linux 3 Room (TryHackMe)
+## 🧠 Reflection: What I Learned
 
-- Gained hands-on experience using **terminal text editors** like Nano and Vim, improving file editing efficiency.
-- Learned to **download files** from the internet using `wget` and transfer files securely with `scp`.
-- Practiced serving files locally using Python’s HTTP server and understood the basics of simple web servers.
-- Developed a solid understanding of **Linux processes**, including viewing, managing, and controlling them with commands like `ps`, `kill`, and `systemctl`.
-- Learned how to manage system services, including enabling and disabling them at boot using `systemctl`.
-- Experienced running tasks in the **background and foreground**, improving multitasking skills on the command line.
-- Gained knowledge of **automation** through scheduling jobs with `cron` and editing crontabs for repetitive tasks.
-- Explored package management and repositories with `apt`, including adding third-party repositories and ensuring software integrity with GPG keys.
-- Improved ability to monitor system health and security through analysis of **system logs** located in `/var/log`.
-- Overall, the room enhanced my confidence navigating Linux systems, managing services, automating tasks, and handling system resources efficiently.
+- Improved my efficiency using terminal editors like **Nano** and **VIM**
+- Learned to **download** and **securely transfer files** using `wget` and `scp`
+- Served local files using **Python HTTP server**
+- Explored Linux **processes**, including viewing, managing, and signaling
+- Controlled system **services** with `systemctl`
+- Gained experience multitasking using **background/foreground jobs**
+- Automated tasks using **cron** and understood scheduling formats
+- Managed software with **apt**, including adding PPAs and verifying with GPG keys
+- Analyzed system **logs** to improve monitoring and troubleshooting
+- Overall, I gained more confidence navigating, managing, and automating Linux systems
+
+---
+
+## 🔗 Related Links
+
+- [TryHackMe: Linux Fundamentals Part 3](https://tryhackme.com/)
+- [My LinkedIn Profile](https://www.linkedin.com/in/areebah890)
 
 ---
